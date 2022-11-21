@@ -2,6 +2,7 @@ export const getAll = "getAll";
 export const add = "add";
 export const update = "update";
 export const getDetail = "getDetail";
+export const deleteOne = "delete";
 
 export const getAllSneakers = (sneakers) => {
   return {
@@ -111,3 +112,31 @@ export const getSneakerDetailFromFB = (id) => {
     addData();
   };
 };
+
+//delete
+export const deleteSneaker = (id) => {
+  return {
+    type: deleteOne,
+    payload: id,
+  };
+}
+
+export const deleteSneakerFromFB = (id) => {
+  return (dispatch) => {
+    const deleteData = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/sneakers/delete/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
+        dispatch(deleteSneaker(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    deleteData();
+  };
+}
