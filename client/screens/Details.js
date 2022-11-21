@@ -35,9 +35,6 @@ const DetailScreen = ({ route, navigation }) => {
     });
   };
 
-  const navigateDelete = () => {
-    navigation.navigate("Delete");
-  };
   // const list = [
   //   {
   //     id: 1,
