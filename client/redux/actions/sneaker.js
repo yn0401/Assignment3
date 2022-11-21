@@ -1,5 +1,6 @@
 export const getAll = "getAll";
 export const add = "add";
+export const update = "update";
 
 export const getAllSneakers = (sneakers) => {
   return {
@@ -49,5 +50,33 @@ export const addSneakerToFB = (sneaker) => {
       }
     };
     addData();
+  };
+};
+
+export const updateSneaker = (sneaker) => {
+  return {
+    type: update,
+    payload: sneaker,
+  };
+}
+
+export const updateSneakerToFB = (sneaker) => {
+  return (dispatch) => {
+    const updateData = async () => {
+      try {
+        const res = await fetch("http://10.104.21.95:3000/sneakers/update:id", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sneaker),
+        });
+        const data = await res.json();
+        dispatch(updateSneaker(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    updateData();
   };
 };
