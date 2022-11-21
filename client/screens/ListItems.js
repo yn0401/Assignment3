@@ -12,7 +12,7 @@ import Octicons from "react-native-vector-icons/Octicons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { fetchAll } from "../redux/actions/sneaker";
+import { fetchAll,searchSneakerByNameFromFB } from "../redux/actions/sneaker";
 import { useEffect } from "react";
 
 
@@ -20,10 +20,22 @@ import { useEffect } from "react";
 function ListScreen({ navigation }) {
   const dispatch = useDispatch();
   const db = useSelector((store) => store.sneakers);
-  console.log("db", db);
+  
+
+  const [text, onChangeText] = useState("");
+  
+  const search = (keyword) => {
+    if(keyword != ""){
+      dispatch(searchSneakerByNameFromFB(keyword));
+    }else{
+      dispatch(fetchAll());
+    }
+    
+  }
 
   useEffect(() => {
     dispatch(fetchAll());
+    console.log("db", db);
   }, []);
 
   const navigateAdd = (id) => {
@@ -55,10 +67,12 @@ function ListScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.search}>
-        <Octicons name="search" size={24} color="#000" />
+        <Octicons name="search" size={24} color="#000" onPress={() => {search(text)}}/>
         <TextInput
           style={styles.searchInput}
           placeholder="Enter Sneaker's Name"
+          onChangeText={onChangeText}
+          value={text}
         />
         <Octicons
           name="diff-added"

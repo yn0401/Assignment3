@@ -3,6 +3,8 @@ export const add = "add";
 export const update = "update";
 export const getDetail = "getDetail";
 
+export const search = "search";
+
 export const getAllSneakers = (sneakers) => {
   return {
     type: getAll,
@@ -94,7 +96,7 @@ export const getSneakerDetail = (sneaker) => {
 
 export const getSneakerDetailFromFB = (id) => {
   return (dispatch) => {
-    const addData = async () => {
+    const getDetail = async () => {
       try {
         const res = await fetch(`http://localhost:3000/sneakers/${id}`, {
           method: "GET",
@@ -108,6 +110,31 @@ export const getSneakerDetailFromFB = (id) => {
         console.log(error);
       }
     };
-    addData();
+    getDetail();
   };
 };
+
+
+export const searchSneakerByName = (sneakers) => {
+  return {
+    type: search,
+    payload: sneakers,
+  };
+};
+
+export const searchSneakerByNameFromFB = (name) => {
+  return (dispatch) => {
+    const getData = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/sneakers/search/${name}`);
+        const sneakers = await res.json();
+        dispatch(searchSneakerByName(sneakers));
+        console.log(sneakers);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  };
+};
+

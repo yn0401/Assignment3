@@ -87,6 +87,7 @@ app.put("/sneakers/update/:id", async (req, res) => {
 app.get("/sneakers/search/:name", async (req, res) => {
   const ref = db.collection("sneakers");
   const name = req.params.name;
+  console.log(name);
   try {
     ref.where("name", "==", name).get().then((snapshot) => {
       const data = snapshot.docs.map((doc) => ({

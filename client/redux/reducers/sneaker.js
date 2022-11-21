@@ -1,4 +1,4 @@
-import { getAll, add, update, getDetail } from "../actions/sneaker";
+import { getAll, add, update, getDetail, search } from "../actions/sneaker";
 
 const initialState = {
   sneakers: [],
@@ -29,6 +29,11 @@ export const sneakerReducer = (state = initialState, action) => {
       return {
         ...state,
         item: action.payload,
+      };
+    case search:
+      return {
+        ...state,
+        sneakers: [...action.payload],
       };
     default:
       return { ...state };
