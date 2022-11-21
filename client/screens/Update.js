@@ -111,6 +111,8 @@ const UpdateScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const item = route.params.item;
+  const id = route.params.id;
+  console.log("item", item);
   const [name, setName] = useState(item.name);
   const [brand, setBrand] = useState(item.brand);
   const [price, setPrice] = useState(item.price);
@@ -121,6 +123,7 @@ const UpdateScreen = ({ route, navigation }) => {
 
   const updateSneaker = () => {
     const sneaker = {
+      id: id,
       name: name,
       brand: brand,
       price: price,

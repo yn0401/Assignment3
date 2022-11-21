@@ -20,6 +20,7 @@ const AppNavigator = () => (
     <Screen name="List" component={ListScreen} />
     <Screen name="Add" component={AddScreen} />
     <Screen name="Details" component={DetailScreen} />
+    <Screen name="Update" component={UpdateScreen} />
   </Navigator>
 );
 

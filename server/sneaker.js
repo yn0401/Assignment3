@@ -73,6 +73,7 @@ app.delete("/sneakers/delete/:id", async (req, res) => {
 app.put("/sneakers/update/:id", async (req, res) => {
   const ref = db.collection("sneakers");
   const id = req.params.id;
+  console.log(id);
   const data = req.body;
   try {
     ref.doc(id).update(data);

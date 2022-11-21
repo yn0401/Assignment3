@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 15,
     border: "1px solid #ccc",
-    marginTop: 30,
   },
   searchInput: {
     backgroundColor: "#fff",

@@ -27,50 +27,51 @@ const DetailScreen = ({ route, navigation }) => {
     console.log("item: ", store);
     setItem(store)
   },[store]);
-  
-  
 
-  const navigateUpdate = () => {
-    navigation.navigate("Update");
+  const navigateUpdate = (id) => {
+    navigation.navigate("Update", {
+      item: item,
+      id: id
+    });
   };
 
   const navigateDelete = () => {
     navigation.navigate("Delete");
   };
-  const list = [
-    {
-      id: 1,
-      name: "NMD_R1 SPECTOO",
-      brand: "Adidas ",
-      price: "2.800.000",
-      image:
-        "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-1-1636602842.jpg",
-      image1:
-        "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-2.jpg",
-      image2:
-        "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-3.jpg",
-      image3:
-        "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-4.jpg",
-      size1: 42,
-      size2: 43,
-      stock: 10,
-      description: "Ngay từ ban đầu, thương hiệu adidas NMD đã hướng tới tương lai. Đề cao sự tiến hóa. Và hành trình tiến bộ.Lấy cảm hứng từ thời đại streaming dữ liệu kết nối không ngừng, đôi giày adidas NMD_R1 Spectoo này đặt dấu ấn mới mẻ vào phong cách NMD kinh điển. Thân giày bằng vải dệt kim thuôn gọn đầy ấn tượng với họa tiết graphic chữ in cùng mặt bên xuyên thấu, như sự chuyển biến đầy tinh tế từ kẻ khám phá phố thị thành cư dân kỹ thuật số. Với thiết kế linh hoạt và đàn hồi, đế giữa adidas Boost cho cảm giác thoải mái đến ngỡ ngàng từ bước chân đầu tiên tới sải bước cuối cùng.",
-    },
-    // {
-    //   id: 2,
-    //   name: "Nike Air Force 2",
-    //   price: 200,
-    //   image:
-    //     "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
-    // },
-    // {
-    //   id: 3,
-    //   name: "Nike Air Force 3",
-    //   price: 300,
-    //   image:
-    //     "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
-    // },
-  ];
+  // const list = [
+  //   {
+  //     id: 1,
+  //     name: "NMD_R1 SPECTOO",
+  //     brand: "Adidas ",
+  //     price: "2.800.000",
+  //     image:
+  //       "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-1-1636602842.jpg",
+  //     image1:
+  //       "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-2.jpg",
+  //     image2:
+  //       "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-3.jpg",
+  //     image3:
+  //       "https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nasa-nmdr1-spectoo-footwear-white-fx6818-king-shoes-sneaker-real-hcm-4.jpg",
+  //     size1: 42,
+  //     size2: 43,
+  //     stock: 10,
+  //     description: "Ngay từ ban đầu, thương hiệu adidas NMD đã hướng tới tương lai. Đề cao sự tiến hóa. Và hành trình tiến bộ.Lấy cảm hứng từ thời đại streaming dữ liệu kết nối không ngừng, đôi giày adidas NMD_R1 Spectoo này đặt dấu ấn mới mẻ vào phong cách NMD kinh điển. Thân giày bằng vải dệt kim thuôn gọn đầy ấn tượng với họa tiết graphic chữ in cùng mặt bên xuyên thấu, như sự chuyển biến đầy tinh tế từ kẻ khám phá phố thị thành cư dân kỹ thuật số. Với thiết kế linh hoạt và đàn hồi, đế giữa adidas Boost cho cảm giác thoải mái đến ngỡ ngàng từ bước chân đầu tiên tới sải bước cuối cùng.",
+  //   },
+  //   // {
+  //   //   id: 2,
+  //   //   name: "Nike Air Force 2",
+  //   //   price: 200,
+  //   //   image:
+  //   //     "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
+  //   // },
+  //   // {
+  //   //   id: 3,
+  //   //   name: "Nike Air Force 3",
+  //   //   price: 300,
+  //   //   image:
+  //   //     "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
+  //   // },
+  // ];
 
   return (
     //List items
@@ -124,7 +125,7 @@ const DetailScreen = ({ route, navigation }) => {
           </View>
 
           <View style={styles.footer}>
-            <TouchableOpacity onPress={navigateUpdate} style={styles.btn}>
+            <TouchableOpacity onPress={() => navigateUpdate(id)} style={styles.btn}>
               <Text style={styles.btnText}>UPDATE</Text>
             </TouchableOpacity>
 

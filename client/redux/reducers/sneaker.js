@@ -23,12 +23,6 @@ export const sneakerReducer = (state = initialState, action) => {
       console.log("Update", action.payload);
       return {
         ...state,
-        sneakers: state.sneakers.map((sneaker) => {
-          if (sneaker.id === action.payload.id) {
-            return action.payload;
-          }
-          return sneaker;
-        }),
       };
     case getDetail:
       // console.log("getDetail", action.payload);

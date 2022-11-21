@@ -66,7 +66,7 @@ export const updateSneakerToFB = (sneaker) => {
     const updateData = async () => {
       try {
         const res = await fetch(
-          `http://10.104.21.95:3000/sneakers/update/${id}`,
+          `http://localhost:3000/sneakers/update/${sneaker.id}`,
           {
             method: "PUT",
             headers: {
@@ -93,11 +93,10 @@ export const getSneakerDetail = (sneaker) => {
 };
 
 export const getSneakerDetailFromFB = (id) => {
-  // console.log(id)
   return (dispatch) => {
     const addData = async () => {
       try {
-        const res = await fetch(`http://10.104.21.95:3000/sneakers/${id}`, {
+        const res = await fetch(`http://localhost:3000/sneakers/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
