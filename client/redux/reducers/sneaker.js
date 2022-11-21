@@ -1,8 +1,8 @@
-import { getAll, add, update, getDetail, search } from "../actions/sneaker";
+import { getAll, add, update, getDetail,search,deleteOne } from "../actions/sneaker";
 
 const initialState = {
   sneakers: [],
-  item: {}
+  item: {},
 };
 
 export const sneakerReducer = (state = initialState, action) => {
@@ -29,6 +29,12 @@ export const sneakerReducer = (state = initialState, action) => {
       return {
         ...state,
         item: action.payload,
+      };
+    case deleteOne:
+      console.log("Delete", action.payload);
+      return {
+        ...state,
+        sneakers: state.sneakers.filter((item) => item.id !== action.payload),
       };
     case search:
       return {

@@ -12,7 +12,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 
 import { useDispatch } from "react-redux";
-import { addSneakerToFB } from "../redux/actions/sneaker";
+import { addSneakerToFB, fetchAll } from "../redux/actions/sneaker";
 
 import { firebase } from "../config/firebase";
 import {
@@ -126,7 +126,7 @@ const AddScreen = ({ params }) => {
       url: url,
     };
     dispatch(addSneakerToFB(sneaker));
-    
+
   };
 
   return (

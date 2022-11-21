@@ -4,7 +4,7 @@ import Octicons from "react-native-vector-icons/Octicons";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getSneakerDetailFromFB } from "../redux/actions/sneaker";
+import { getSneakerDetailFromFB, deleteSneakerFromFB, fetchAll } from "../redux/actions/sneaker";
 import Fo from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/Octicons";
 import Ion from "react-native-vector-icons/Ionicons";
@@ -33,6 +33,12 @@ const DetailScreen = ({ route, navigation }) => {
       item: item,
       id: id
     });
+  };
+  
+  const deleteSneaker = (id) => {
+    dispatch(fetchAll());
+    dispatch(deleteSneakerFromFB(id));
+    navigation.navigate("List");
   };
 
   // const list = [
@@ -126,9 +132,8 @@ const DetailScreen = ({ route, navigation }) => {
               <Text style={styles.btnText}>UPDATE</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={navigateDelete} style={styles.btn}>
+            <TouchableOpacity onPress={() => deleteSneaker(id)} style={styles.btn}>
               <Text style={styles.btnText}>DELETE</Text>
-
             </TouchableOpacity>
           </View>
         </View>

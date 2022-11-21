@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     fontWeight: "bold",
+    flexWrap: 'wrap'
   },
   brand: {
     fontSize: 16,

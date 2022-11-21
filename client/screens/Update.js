@@ -20,7 +20,7 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
-import { updateSneakerToFB } from "../redux/actions/sneaker";
+import { updateSneakerToFB,fetchAll } from "../redux/actions/sneaker";
 
 const UpdateScreen = ({ route, navigation }) => {
   const navigateBack = () => {
@@ -133,6 +133,7 @@ const UpdateScreen = ({ route, navigation }) => {
       url: url,
     };
     dispatch(updateSneakerToFB(sneaker));
+    dispatch(fetchAll());
   };
 
   return (
