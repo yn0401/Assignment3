@@ -1,5 +1,6 @@
 export const getAll = "getAll";
 export const add = "add";
+export const getDetail = "getDetail";
 
 export const getAllSneakers = (sneakers) => {
   return {
@@ -12,7 +13,7 @@ export const fetchAll = () => {
   return (dispatch) => {
     const getData = async () => {
       try {
-        const res = await fetch("http://10.104.21.95:3000/sneakers");
+        const res = await fetch("http://localhost:3000/sneakers");
         const sneakers = await res.json();
         dispatch(getAllSneakers(sneakers));
         console.log(sneakers);
@@ -35,7 +36,7 @@ export const addSneakerToFB = (sneaker) => {
   return (dispatch) => {
     const addData = async () => {
       try {
-        const res = await fetch("http://10.104.21.95:3000/sneakers/add", {
+        const res = await fetch("http://localhost:3000/sneakers/add", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -44,6 +45,34 @@ export const addSneakerToFB = (sneaker) => {
         });
         const data = await res.json();
         dispatch(addSneaker(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    addData();
+  };
+};
+
+export const getSneakerDetail = (sneaker) => {
+  return {
+    type: getDetail,
+    payload: sneaker,
+  };
+};
+
+export const getSneakerDetailFromFB = (id) => {
+  // console.log(id)
+  return (dispatch) => {
+    const addData = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/sneakers/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
+        dispatch(getSneakerDetail(data));
       } catch (error) {
         console.log(error);
       }

@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import Octicons from "react-native-vector-icons/Octicons";
@@ -14,18 +15,7 @@ import { useState } from "react";
 import { fetchAll } from "../redux/actions/sneaker";
 import { useEffect } from "react";
 
-const ListItem = ({ item }) => {
-  return (
-    <View style={styles.item} key={item.id}>
-      <Image style={styles.image} source={{ uri: item.url }} />
-      <View style={styles.info}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.brand}>Brand: {item.brand}</Text>
-        <Text style={styles.price}>Price: {item.price} VND</Text>
-      </View>
-    </View>
-  );
-};
+
 
 function ListScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -36,8 +26,30 @@ function ListScreen({ navigation }) {
     dispatch(fetchAll());
   }, []);
 
-  const navigateAdd = () => {
+  const navigateAdd = (id) => {
     navigation.navigate("Add");
+  };
+
+  const navigate = (id) => {
+    // console.log(id)
+    navigation.navigate("Details",{
+      id : id
+    });
+  };
+
+  const ListItem = ({ item }) => {
+    return (
+      <TouchableOpacity  onPress={() => navigate(item.id)}>
+        <View style={styles.item} key={item.id}>
+          <Image style={styles.image} source={{ uri: item.url }} />
+          <View style={styles.info}>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.brand}>Brand: {item.brand}</Text>
+            <Text style={styles.price}>Price: {item.price} VND</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -55,11 +67,14 @@ function ListScreen({ navigation }) {
           onPress={navigateAdd}
         />
       </View>
+
       <FlatList
+       
         keyExtractor={(item) => item.id}
         data={db.sneakers}
         renderItem={ListItem}
       />
+
     </View>
   );
 }
