@@ -1,34 +1,42 @@
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  FlatList,
+} from "react-native";
 import React from "react";
 import Octicons from "react-native-vector-icons/Octicons";
 
-const ListScreen = () => {
-  const list = [
-    {
-      id: 1,
-      name: "Nike Air Force 1",
-      price: 100,
-      image:
-        "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
-    },
-    {
-      id: 2,
-      name: "Nike Air Force 2",
-      price: 200,
-      image:
-        "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
-    },
-    {
-      id: 3,
-      name: "Nike Air Force 3",
-      price: 300,
-      image:
-        "http://saigonsneakerstore.com/thumbs/1080x720x2/upload/product/1-2293.jpg",
-    },
-  ];
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { fetchAll } from "../redux/actions/sneaker";
+import { useEffect } from "react";
+
+const ListItem = ({ item }) => {
+  return (
+    <View style={styles.item} key={item.id}>
+      <Image style={styles.image} source={{ uri: item.url }} />
+      <View style={styles.info}>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.brand}>Brand: {item.brand}</Text>
+        <Text style={styles.price}>Price: {item.price} VND</Text>
+      </View>
+    </View>
+  );
+};
+
+function ListScreen() {
+  const dispatch = useDispatch();
+  const db = useSelector((store) => store.sneakers);
+  console.log("db", db);
+
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, []);
 
   return (
-    //List items
     <View style={styles.container}>
       <View style={styles.search}>
         <Octicons name="search" size={24} color="#000" />
@@ -37,18 +45,14 @@ const ListScreen = () => {
           placeholder="Enter Sneaker's Name"
         />
       </View>
-      {list.map((item) => (
-        <View style={styles.item} key={item.id}>
-          <Image style={styles.image} source={{ uri: item.image }} />
-          <View style={styles.info}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.price}>{item.price} VND</Text>
-          </View>
-        </View>
-      ))}
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={db.sneakers}
+        renderItem={ListItem}
+      />
     </View>
   );
-};
+}
 
 export default ListScreen;
 
@@ -77,6 +81,10 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  brand: {
+    fontSize: 16,
+    fontWeight: "600",
   },
   price: {
     fontSize: 16,
