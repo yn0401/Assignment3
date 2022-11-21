@@ -15,23 +15,9 @@ import { useState } from "react";
 import { fetchAll } from "../redux/actions/sneaker";
 import { useEffect } from "react";
 
-const ListItem = ({ item }) => {
-  return (
-    <View style={styles.item} key={item.id}>
-      <Image style={styles.image} source={{ uri: item.url }} />
-      <View style={styles.info}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.brand}>Brand: {item.brand}</Text>
-        <Text style={styles.price}>Price: {item.price} VND</Text>
-      </View>
-    </View>
-  );
-};
 
-function ListScreen({navigation}) {
-  const navigate = () => {
-    navigation.navigate("Details");
-  }
+
+function ListScreen({ navigation }) {
   const dispatch = useDispatch();
   const db = useSelector((store) => store.sneakers);
   console.log("db", db);
@@ -39,6 +25,32 @@ function ListScreen({navigation}) {
   useEffect(() => {
     dispatch(fetchAll());
   }, []);
+
+  const navigateAdd = (id) => {
+    navigation.navigate("Add");
+  };
+
+  const navigate = (id) => {
+    // console.log(id)
+    navigation.navigate("Details",{
+      id : id
+    });
+  };
+
+  const ListItem = ({ item }) => {
+    return (
+      <TouchableOpacity  onPress={() => navigate(item.id)}>
+        <View style={styles.item} key={item.id}>
+          <Image style={styles.image} source={{ uri: item.url }} />
+          <View style={styles.info}>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.brand}>Brand: {item.brand}</Text>
+            <Text style={styles.price}>Price: {item.price} VND</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -48,16 +60,21 @@ function ListScreen({navigation}) {
           style={styles.searchInput}
           placeholder="Enter Sneaker's Name"
         />
+        <Octicons
+          name="diff-added"
+          size={24}
+          color="#000"
+          onPress={navigateAdd}
+        />
       </View>
-      <TouchableOpacity onPress={navigate}>
+
       <FlatList
+       
         keyExtractor={(item) => item.id}
         data={db.sneakers}
         renderItem={ListItem}
-       
       />
-      </TouchableOpacity>
-     
+
     </View>
   );
 }
@@ -78,9 +95,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   image: {
-    width: 200,
+    width: 150,
     height: 150,
-    resizeMode: "cover",
+    resizeMode: "contain",
     borderRadius: 10,
   },
   info: {
@@ -106,6 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 15,
     border: "1px solid #ccc",
+    marginTop: 30,
   },
   searchInput: {
     backgroundColor: "#fff",

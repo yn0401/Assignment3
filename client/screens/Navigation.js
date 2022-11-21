@@ -11,8 +11,8 @@ const { Navigator, Screen } = createStackNavigator();
 
 const AppNavigator = () => (
   <Navigator screenOptions={{ headerShown: true }}>
-    <Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-    <Screen name="List" component={ListScreen} />
+    <Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+    <Screen name="List" component={ListScreen}  />
     <Screen name="Add" component={AddScreen} />
     <Screen name="Details" component={DetailScreen} />
   </Navigator>
