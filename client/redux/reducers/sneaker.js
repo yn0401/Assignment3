@@ -1,7 +1,8 @@
-import { getAll, add, update } from "../actions/sneaker";
+import { getAll, add, update, getDetail } from "../actions/sneaker";
 
 const initialState = {
   sneakers: [],
+  item: {}
 };
 
 export const sneakerReducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ export const sneakerReducer = (state = initialState, action) => {
           }
           return sneaker;
         }),
+      };
+    case getDetail:
+      // console.log("getDetail", action.payload);
+      return {
+        ...state,
+        item: action.payload,
       };
     default:
       return { ...state };

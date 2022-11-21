@@ -126,6 +126,7 @@ const AddScreen = ({ params }) => {
       url: url,
     };
     dispatch(addSneakerToFB(sneaker));
+    
   };
 
   return (

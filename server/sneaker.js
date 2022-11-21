@@ -33,6 +33,7 @@ app.get("/sneakers", async (req, res) => {
 app.get("/sneakers/:id", async (req, res) => {
   const ref = db.collection("sneakers");
   const id = req.params.id;
+  console.log(id);
   try {
     ref.doc(id).get().then((snapshot) => {
       const data = snapshot.data();

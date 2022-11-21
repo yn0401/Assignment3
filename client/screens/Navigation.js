@@ -11,12 +11,15 @@ import UpdateScreen from "./Update";
 const { Navigator, Screen } = createStackNavigator();
 
 const AppNavigator = () => (
-  <Navigator screenOptions={{ headerShown: false }}>
-    {/* <Screen name="Home" component={HomeScreen} />
+  <Navigator screenOptions={{ headerShown: true }}>
+    <Screen
+      name="Home"
+      component={HomeScreen}
+      options={{ headerShown: false }}
+    />
     <Screen name="List" component={ListScreen} />
     <Screen name="Add" component={AddScreen} />
-    <Screen name="Detail" component={DetailScreen} /> */}
-    <Screen name="Update" component={UpdateScreen} />
+    <Screen name="Details" component={DetailScreen} />
   </Navigator>
 );
 
