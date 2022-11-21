@@ -12,7 +12,7 @@ export const fetchAll = () => {
   return (dispatch) => {
     const getData = async () => {
       try {
-        const res = await fetch("http://localhost:3000/sneakers");
+        const res = await fetch("http://10.104.21.95:3000/sneakers");
         const sneakers = await res.json();
         dispatch(getAllSneakers(sneakers));
         console.log(sneakers);
@@ -35,7 +35,7 @@ export const addSneakerToFB = (sneaker) => {
   return (dispatch) => {
     const addData = async () => {
       try {
-        const res = await fetch("http://localhost:3000/sneakers/add", {
+        const res = await fetch("http://10.104.21.95:3000/sneakers/add", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -50,4 +50,4 @@ export const addSneakerToFB = (sneaker) => {
     };
     addData();
   };
-}
+};

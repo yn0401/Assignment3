@@ -125,7 +125,6 @@ const AddScreen = ({ params }) => {
       size: size,
       url: url,
     };
-    // dispatch(SneakerAction.addSneaker(sneaker));
     dispatch(addSneakerToFB(sneaker));
   };
 
@@ -143,7 +142,7 @@ const AddScreen = ({ params }) => {
       </TouchableOpacity>
       <SafeAreaView>
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{ justifyContent: "center", alignItems: "center" }}
         >
           <TextInput
             style={styles.InputText}

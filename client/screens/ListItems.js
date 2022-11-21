@@ -27,7 +27,7 @@ const ListItem = ({ item }) => {
   );
 };
 
-function ListScreen() {
+function ListScreen({ navigation }) {
   const dispatch = useDispatch();
   const db = useSelector((store) => store.sneakers);
   console.log("db", db);
@@ -36,6 +36,10 @@ function ListScreen() {
     dispatch(fetchAll());
   }, []);
 
+  const navigateAdd = () => {
+    navigation.navigate("Add");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.search}>
@@ -43,6 +47,12 @@ function ListScreen() {
         <TextInput
           style={styles.searchInput}
           placeholder="Enter Sneaker's Name"
+        />
+        <Octicons
+          name="diff-added"
+          size={24}
+          color="#000"
+          onPress={navigateAdd}
         />
       </View>
       <FlatList
@@ -70,9 +80,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   image: {
-    width: 200,
+    width: 150,
     height: 150,
-    resizeMode: "cover",
+    resizeMode: "contain",
     borderRadius: 10,
   },
   info: {
@@ -98,6 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 15,
     border: "1px solid #ccc",
+    marginTop: 30,
   },
   searchInput: {
     backgroundColor: "#fff",
