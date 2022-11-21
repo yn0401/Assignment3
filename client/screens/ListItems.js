@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import Octicons from "react-native-vector-icons/Octicons";
@@ -27,7 +28,10 @@ const ListItem = ({ item }) => {
   );
 };
 
-function ListScreen() {
+function ListScreen({navigation}) {
+  const navigate = () => {
+    navigation.navigate("Details");
+  }
   const dispatch = useDispatch();
   const db = useSelector((store) => store.sneakers);
   console.log("db", db);
@@ -45,11 +49,15 @@ function ListScreen() {
           placeholder="Enter Sneaker's Name"
         />
       </View>
+      <TouchableOpacity onPress={navigate}>
       <FlatList
         keyExtractor={(item) => item.id}
         data={db.sneakers}
         renderItem={ListItem}
+       
       />
+      </TouchableOpacity>
+     
     </View>
   );
 }

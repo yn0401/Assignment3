@@ -1,8 +1,18 @@
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from "react-native";
 import React from "react";
 import Octicons from "react-native-vector-icons/Octicons";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { fetchAll } from "../redux/actions/sneaker";
+import { useEffect } from "react";
+import Fo from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/Octicons";
+import Ion from "react-native-vector-icons/Ionicons";
 
-const DetailScreen = () => {
+const DetailScreen = ({navigation}) => {
+  const navigate = () => {
+    navigation.navigate("List");
+  }
   const list = [
     {
       id: 1,
@@ -41,6 +51,7 @@ const DetailScreen = () => {
   return (
     //List items
     <View style={styles.container}>
+      
       {list.map((item) => (
         <View style={styles.item} key={item.id}>
           <Image style={styles.image} source={{ uri: item.image }} />
@@ -86,6 +97,10 @@ const DetailScreen = () => {
             <Text style={styles.txtDes}>{item.description}</Text>
             </View>
           </View>
+
+          <TouchableOpacity  style={styles.btn} onPress={navigate}>
+            <Text style={styles.txtUpdate}>Update</Text>
+            </TouchableOpacity>
         </View>
       ))}
     </View>
@@ -182,7 +197,8 @@ const styles = StyleSheet.create({
   },
   color:{
     paddingTop: 20
-},
+  },
+
 row: {
     flexDirection: "row",
     paddingTop: 20
@@ -196,4 +212,9 @@ row: {
     marginRight: 10,
     resizeMode: "contain",
   },
+  btn:{
+    width: 70,
+    height: 30,
+    backgroundColor: 'black'
+  }
 });
